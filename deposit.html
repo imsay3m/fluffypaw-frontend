@@ -59,16 +59,19 @@
                                 </div>
                                 <div>
                                     <ul class="d-flex gap-3">
-                                        <li class="header-btn"><a href="user-account.html" class="btn">Profile<img
-                                                    src="#" alt=""></a></li>
+                                        <li class="header-btn" id="profile-button"><a href="user-account.html"
+                                                class="btn">Profile<img src="#" alt=""></a></li>
                                         <form action="#" method="post">
-                                            <li class="header-btn ml-3"><button class="btn">Logout<img
-                                                        src="img/icon/w_pawprint.png" alt=""></button></li>
+                                            <li class=""></li>
                                         </form>
-                                        <li class="header-btn"><a href="user-login.html" class="btn">Login<img
+                                        <li class="header-btn ml-3 " onclick="handleLogout()" id="logout-button"><button
+                                                class="btn">Logout<img src="img/icon/w_pawprint.png" alt=""></button>
+                                        </li>
+                                        <li class="header-btn" id="login-button"><a href="user-login.html"
+                                                class="btn">Login<img src="img/icon/w_pawprint.png" alt=""></a></li>
+                                        <li class="header-btn ml-3" id="register-button"><a
+                                                href="user-registration.html" class="btn">Register<img
                                                     src="img/icon/w_pawprint.png" alt=""></a></li>
-                                        <li class="header-btn ml-3"><a href="user-registration.html"
-                                                class="btn">Register<img src="img/icon/w_pawprint.png" alt=""></a></li>
                                     </ul>
                                 </div>
                             </nav>
@@ -205,11 +208,12 @@
     <script src="js/jquery.odometer.min.js"></script>
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.appear.js"></script>
+    <!-- <script src="js/jquery.appear.js"></script> -->
     <script src="js/slick.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>

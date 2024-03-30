@@ -47,27 +47,30 @@
                         <div class="mobile-nav-toggler"><i class="fas fa-bars"></i></div>
                         <div class="menu-wrap">
                             <nav class="menu-nav show">
-                                <div class="logo"><a class="h2 fw-bolder" href="#">Fluffy Paw</a>
+                                <div class="logo"><a class="h2 fw-bolder" href="index.html">Fluffy Paw</a>
                                 </div>
                                 <div class="navbar-wrap main-menu d-none d-lg-flex">
                                     <ul class="navigation">
-                                        <li class="menu-item-has-children"><a href="#">Home</a></li>
-                                        <li><a href="#">Pet List</a></li>
-                                        <li><a href="#">Add Pet</a></li>
-                                        <li><a href="#">Deposit</a></li>
+                                        <li class="menu-item-has-children"><a href="index.html">Home</a></li>
+                                        <li><a href="pets.html">Pet List</a></li>
+                                        <li><a href="add-pet.html">Add Pet</a></li>
+                                        <li><a href="deposit.html">Deposit</a></li>
                                     </ul>
                                 </div>
                                 <div>
                                     <ul class="d-flex gap-3">
-                                        <li class="header-btn"><a href="{% url " account" %}" class="btn">Profile<img
-                                                    src="#" alt=""></a></li>
+                                        <li class="header-btn" id="profile-button"><a href="user-account.html"
+                                                class="btn">Profile<img src="#" alt=""></a></li>
                                         <form action="#" method="post">
-                                            <li class="header-btn ml-3"><button class="btn">Logout<img
-                                                        src="img/icon/w_pawprint.png" alt=""></button></li>
+                                            <li class=""></li>
                                         </form>
-                                        <li class="header-btn"><a href="#" class="btn">Login<img
-                                                    src="img/icon/w_pawprint.png" alt=""></a></li>
-                                        <li class="header-btn ml-3"><a href="#" class="btn">Register<img
+                                        <li class="header-btn ml-3 " onclick="handleLogout()" id="logout-button"><button
+                                                class="btn">Logout<img src="img/icon/w_pawprint.png" alt=""></button>
+                                        </li>
+                                        <li class="header-btn" id="login-button"><a href="user-login.html"
+                                                class="btn">Login<img src="img/icon/w_pawprint.png" alt=""></a></li>
+                                        <li class="header-btn ml-3" id="register-button"><a
+                                                href="user-registration.html" class="btn">Register<img
                                                     src="img/icon/w_pawprint.png" alt=""></a></li>
                                     </ul>
                                 </div>
@@ -77,28 +80,6 @@
                 </div>
             </div>
         </div>
-        <!-- header-search -->
-        <div class="search-popup-wrap" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="search-close">
-                <span><i class="fas fa-times"></i></span>
-            </div>
-            <div class="search-wrap text-center">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <h2 class="title">... Search Here ...</h2>
-                            <div class="search-form">
-                                <form action="#">
-                                    <input type="text" name="search" placeholder="Type keywords here">
-                                    <button class="search-btn"><i class="fas fa-search"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- header-search-end -->
     </header>
     <!-- header-area-end -->
 
@@ -221,11 +202,12 @@
     <script src="js/jquery.odometer.min.js"></script>
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/jquery-ui.min.js"></script>
-    <script src="js/jquery.appear.js"></script>
+    <!-- <script src="js/jquery.appear.js"></script> -->
     <script src="js/slick.min.js"></script>
     <script src="js/wow.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
