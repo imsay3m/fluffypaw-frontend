@@ -32,7 +32,7 @@ const handlePetDetails = async () => {
                                 div.innerHTML =
                                     `
                                     <h4 class="title">${pet.name}</h4>
-                                    <p>{{pet.description}}</p>
+                                    <p>${pet.description}</p>
                                     <div class="text-center  breeder-details-img">
                                         <img src="${pet.image}" alt="">
                                     </div>
@@ -59,6 +59,7 @@ const handlePetDetails = async () => {
                                             </div>
                                             <div class="col-md-3 col-sm-4 col-6">
                                                 <div class="breeder-info-item">
+                                                    <h6>Price:</h6>
                                                     <span>${(pet.price == 0) ? `Free` : pet.price}</span>
                                                 </div>
                                             </div>

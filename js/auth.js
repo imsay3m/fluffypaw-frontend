@@ -64,7 +64,7 @@ const handleLogin = (event) => {
             headers: { "content-type": "application/json" },
             body: JSON.stringify({ username, password })
         })
-            .then(C)
+            .then(res => res.json())
             .then((data) => {
                 if (data.token && data.user_id) {
                     localStorage.setItem("token", data.token);
