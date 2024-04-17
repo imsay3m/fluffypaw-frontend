@@ -64,12 +64,20 @@ const handleLogin = (event) => {
             headers: { "content-type": "application/json" },
             body: JSON.stringify({ username, password })
         })
-            .then((response) => response.json())
+            .then(C)
             .then((data) => {
                 if (data.token && data.user_id) {
                     localStorage.setItem("token", data.token);
                     localStorage.setItem("user_id", data.user_id);
-                    window.location.href = "user-account.html";
+                    const user_id = data.user_id
+                    fetch(`https://fluffypaw-backend.onrender.com/user/account/?user_id=${user_id}`)
+                        .then(res => res.json())
+                        .then((data) => {
+                            if (data && data.length > 0 && data[0].id) {
+                                localStorage.setItem("user_account", data[0].id);
+                                window.location.href = "user-account.html";
+                            }
+                        })
                 }
             })
             .catch(error => {
@@ -91,10 +99,4 @@ const showPasswordAlert = (message) => {
                         `
     parent.appendChild(alertDiv)
 }
-
-const getValue = (id) => {
-    const value = document.getElementById(id).value
-    return value
-}
-
 

@@ -1,7 +1,16 @@
+const loginRedirector = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        // User is not authenticated, redirect to login page or perform any other action
+        window.location.href = "user-login.html"; // Redirect to the login page
+        return;
+    }
+}
 const isAuthenticated = () => {
     const token = localStorage.getItem("token");
     return token !== null;
 };
+
 
 // Function to toggle visibility of profile and logout button based on authentication
 const toggleAuthElements = () => {
@@ -25,18 +34,7 @@ const toggleAuthElements = () => {
 // Call the function to toggle visibility on page load
 window.onload = toggleAuthElements;
 
-const handleLogout = () => {
-    const token = localStorage.getItem('token')
-    fetch("https://fluffypaw-backend.onrender.com/user/logout/", {
-        method: "GET",
-        authorization: `Token ${token}`,
-        headers: { "content-type": "application/json" },
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data)
-            localStorage.removeItem('token')
-            localStorage.removeItem('user_id')
-            window.location.href = "index.html"; // Redirect to the home page after successful logout
-        })
+const getValue = (id) => {
+    const value = document.getElementById(id).value
+    return value
 }
