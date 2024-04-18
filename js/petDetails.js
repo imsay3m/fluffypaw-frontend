@@ -64,15 +64,12 @@ const handlePetDetails = async () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        {% if pet.adopter is None %}
-                                        <a href="{% url " adopt_pet" pet.id %}" class="btn">Apply Today <img
-                                                src="img/icon/w_pawprint.png" alt=""></a>
-                                        {% else %}
-                                        <a href="{% url " adopt_pet" pet.id %}" class="btn disabled ">Already Adopted <img
-                                                src="img/icon/w_pawprint.png" alt=""></a>
-                                        {% endif %}
+                                        ${pet.adopter != null ? `
+                                        <a href="" class="btn disabled ">Already Adopted <img src="img/icon/w_pawprint.png" alt=""></a>` : `
+                                        <a href="#" class="btn">Apply Today <img src="img/icon/w_pawprint.png" alt=""></a>`}
                                     </div>
-                                    {% if pet.adopter == request.user %}
+                                    <!-- add review section -->
+                                    ${pet.adopter != null && isAuthenticated() && pet.adopter == localStorage.getItem('user_id') ? `
                                     <div class="my-3">
                                         <div class="card border-dark">
                                             <div class="card-header">
@@ -80,14 +77,16 @@ const handlePetDetails = async () => {
                                             </div>
                                             <div class="card-body">
                                                 <form method="post">
-                                                    {% csrf_token %}
-                                                    {{ form|crispy }}
-                                                    <button class="btn btn-warning" type="submit">Submit</button>
+                                                    <div class="form-group">
+                                                        <label for="description">Description</label>
+                                                        <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+                                                    </div>
+                                                    <button class="btn btn-warning" type="submit" onclick="addReview(event)">Submit</button>
                                                 </form>
                                             </div>
                                         </div>
-                                    </div>
-                                    {% endif %}
+                                    </div>` : ``}
+                                    <!-- review section -->
                                     <div class="my-3">
                                         <div class="alert alert-primary" role="alert">Total Reviews: {{reviews|length}}</div>
                                         {% if reviews %}
