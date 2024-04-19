@@ -5,12 +5,12 @@ const loadAccount = () => {
         fetch(`https://fluffypaw-backend.onrender.com/user/list/${user_id}/`)
             .then((res) => res.json())
             .then((user) => {
-                console.log(user)
+                // console.log(user)
                 try {
                     fetch(`https://fluffypaw-backend.onrender.com/user/account/${user_account}/`)
                         .then((response) => response.json())
                         .then((account) => {
-                            console.log(account)
+                            // console.log(account)
                             const parent = document.getElementById("user-account")
                             const div = document.createElement("div")
                             div.classList.add("row", "g-0", "align-items-center")
@@ -25,8 +25,8 @@ const loadAccount = () => {
                                                 ${user.username}</small></h5>
                                         <h6 class="card-text">Email: ${user.email}</h6>
                                         <h6 class="card-text">Balance: ${account.balance}</h6>
-                                        <a href="#" class="btn btn-sm btn-primary mb-3">Edit Account</a>
-                                        <a href="#" class="btn btn-sm btn-primary mb-3">Change
+                                        <a href="edit-account.html?id=${user_id}" class="btn btn-sm btn-primary mb-3">Edit Account</a>
+                                        <a class="btn btn-sm btn-primary mb-3" href="change-password.html?id=${user_id}">Change
                                             Password</a>
                                 </div>
                             </div>
@@ -41,5 +41,7 @@ const loadAccount = () => {
         console.log(error)
     }
 }
+
+
 loginRedirector()
 loadAccount()

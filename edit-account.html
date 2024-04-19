@@ -82,11 +82,29 @@
     </header>
     <!-- header-area-end -->
 
-    <div class="container p-5">
+    <div class="container p-5 col-8">
         <h1>Account Update</h1>
         <div>
-            <form method="post">
-                <button class="btn btn-primary my-3" type="submit">Update</button>
+            <form method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input type="text" class="form-control" id="first-name" name="first-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input type="text" class="form-control" id="last-name" name="last-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input type="file" class="form-control-file" id="image" name="image">
+                    <br>
+                    <img id="image-preview" src="" alt="User Image" style="max-width: 150px;">
+                </div>
+                <button type="submit" class="btn btn-primary" onclick="editAccount(event)">Submit</button>
             </form>
         </div>
     </div>
@@ -207,6 +225,7 @@
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/editAccount.js"></script>
     <script src="js/logout.js"></script>
 </body>
 
