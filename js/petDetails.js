@@ -11,14 +11,92 @@ const getParams = () => {
     }
     return param
 }
+
+const addReview = (event) => {
+    event.preventDefault();
+    loginRedirector();
+    const user = localStorage.getItem("user_id");
+    const pet = getParams();
+    const body = document.getElementById("description").value;
+    try {
+        const formData = new FormData();
+        formData.append("user", user);
+        formData.append("pet", pet);
+        formData.append("body", body);
+        console.log(formData)
+        fetch(`https://fluffypaw-backend.onrender.com/pet/review/`, {
+            method: "POST",
+            body: formData
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    console.log(response.status)
+                } else {
+                    console.log("POST Request failed with status code:", response.status);
+                }
+            })
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
+
+const formattedDate = (isoString) => {
+    const date = new Date(isoString);
+
+    // Options for formatting the date and time
+    const options = {
+        year: 'numeric',
+        month: 'short', // Use 'long' for full month name
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        // timeZoneName: 'short' // Display time zone abbreviation
+    };
+
+    // Format the date and time
+    return date.toLocaleString('en-US', options);
+};
+
+const reviewerDetails = async (user_id) => {
+    try {
+        const response = await fetch(`https://fluffypaw-backend.onrender.com/user/list/${user_id}/`);
+        const userData = await response.json();
+        return userData; // Return the user data
+    } catch (error) {
+        console.log(error);
+        return null; // Return null if there's an error
+    }
+};
+
+const adoptPet = (event) => {
+    event.preventDefault();
+    loginRedirector()
+    const pet_id = getParams();
+    const user_id = localStorage.getItem("user_id");
+    fetch(`https://fluffypaw-backend.onrender.com/pet/adopt/`, {
+        method: "POST",
+        body: JSON.stringify({ pet_id, user_id })
+    })
+        .then((response) => {
+            if (response.status == 200) {
+                window.location.href = "user-account.html";
+            } else {
+                console.log("POST Request failed with status code:", response.status);
+            }
+        })
+}
 const handlePetDetails = async () => {
     const id = getParams();
-
     try {
         const response = await fetch(`https://fluffypaw-backend.onrender.com/pet/list/${id}/`)
         const pet = await response.json();
         let cat;
-        const loadCategory = () => {
+        const review = await fetch(`https://fluffypaw-backend.onrender.com/pet/review/?pet__id=${id}`)
+        const reviews = await review.json()
+        const loadCategory = async () => {
             try {
                 fetch("https://fluffypaw-backend.onrender.com/pet/category/")
                     .then(res => res.json())
@@ -66,7 +144,7 @@ const handlePetDetails = async () => {
                                         </div>
                                         ${pet.adopter != null ? `
                                         <a href="" class="btn disabled ">Already Adopted <img src="img/icon/w_pawprint.png" alt=""></a>` : `
-                                        <a href="#" class="btn">Apply Today <img src="img/icon/w_pawprint.png" alt=""></a>`}
+                                        <btn type="submit" onclick="adoptPet(event)" class="btn">Apply Today <img src="img/icon/w_pawprint.png" alt=""></a>`}
                                     </div>
                                     <!-- add review section -->
                                     ${pet.adopter != null && isAuthenticated() && pet.adopter == localStorage.getItem('user_id') ? `
@@ -87,28 +165,27 @@ const handlePetDetails = async () => {
                                         </div>
                                     </div>` : ``}
                                     <!-- review section -->
-                                    <div class="my-3">
-                                        <div class="alert alert-primary" role="alert">Total Reviews: {{reviews|length}}</div>
-                                        {% if reviews %}
-                                        {% for review in reviews %}
-                                        <div class="card mb-1">
-                                            <div class="card-header">
-                                                <h5>{{review.user.first_name}}</h5>
-                                                <p class="card-title text-info">{{review.user.email}} <small
-                                                        class="blockquote-footer">Reviewed
-                                                        On: <cite class="text-primary"
-                                                            title="Source Title">{{review.created_on}}</cite>
-                                                    </small></p>
-                                            </div>
-                                            <div class="card-body">
-                                                <h6 class="card-text">{{review.body}}</h6>
-                                            </div>
-                                        </div>
-                                        {% endfor %}
-                                        {% endif %}
+                                    <div class="my-3" id="reviews-parent">
+                                        <div class="alert alert-primary" role="alert">Total Reviews: ${reviews.length}</div>
                                     </div>
-                                    `
+                                    `;
                                 parent.appendChild(div)
+                                const reviewsParent = document.getElementById("reviews-parent");
+                                reviews.forEach(async (rev) => {
+                                    const userData = await reviewerDetails(rev.user);
+                                    const reviewCard = document.createElement("div");
+                                    reviewCard.classList.add("card", "mb-1");
+                                    reviewCard.innerHTML = `
+                                        <div class="card-header">
+                                            <h5>${userData.first_name + ' ' + userData.last_name}</h5>
+                                            <p class="card-title text-info">${userData.email} <small class="blockquote-footer">Reviewed On: <cite class="text-primary" title="Source Title">${formattedDate(rev.created_on)}</cite></small></p>
+                                        </div>
+                                        <div class="card-body">
+                                            <h6 class="card-text">${rev.body}</h6>
+                                        </div>
+                                    `;
+                                    reviewsParent.appendChild(reviewCard);
+                                });
                             }
                         })
                     })
@@ -119,8 +196,7 @@ const handlePetDetails = async () => {
             }
         }
         loadCategory()
-        console.log(pet)
-
+        // console.log(pet)
     } catch (err) {
         console.log(err.message);
         console.log(err);

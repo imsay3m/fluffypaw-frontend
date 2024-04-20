@@ -67,7 +67,7 @@ const displayPetsList = (pets) => {
                                                 alt=""></a>
                                     </div>
                                     <div class="adoption-shop-content">
-                                        <h4 class="title"><a href="shop-details.html">${pet.name}</a></h4>
+                                        <h4 class="title"><a href="pet-details.html?id=${pet.id}">${pet.name}</a></h4>
                                         <div class="adoption-meta">
                                             <ul>
                                                 <li><i class="fas fa-cog"></i><a href="#">${cat}</a></li>

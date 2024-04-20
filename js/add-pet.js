@@ -29,6 +29,7 @@ const addPet = (e) => {
     const adopter = null
     const added_by = parseInt(localStorage.getItem('user_id'))
     const categories = parseInt(getValue("categories"))
+    console.log(name, description, date_of_birth, image, price, adopter, added_by, categories)
 
     try {
         const formData = new FormData();
@@ -40,12 +41,13 @@ const addPet = (e) => {
         formData.append("adopter", adopter);
         formData.append("added_by", added_by);
         formData.append("categories", categories);
+        console.log(formData)
         fetch("https://fluffypaw-backend.onrender.com/pet/list/", {
             method: "POST",
             body: formData
         })
             .then((response) => {
-                if (response.status === 200) {
+                if (response.status == 200) {
                     window.location.href = "pets.html";
                 } else {
                     console.log("POST Request failed with status code:", response.status);
