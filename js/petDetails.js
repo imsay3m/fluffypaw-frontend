@@ -15,25 +15,28 @@ const getParams = () => {
 const addReview = (event) => {
     event.preventDefault();
     loginRedirector();
-    const user = localStorage.getItem("user_id");
-    const pet = getParams();
     const body = document.getElementById("description").value;
+    const pet = getParams();
+    const user = localStorage.getItem("user_id");
     try {
         const formData = new FormData();
-        formData.append("user", user);
-        formData.append("pet", pet);
         formData.append("body", body);
+        formData.append("pet", pet);
+        formData.append("user", user);
         console.log(formData)
         fetch(`https://fluffypaw-backend.onrender.com/pet/review/`, {
             method: "POST",
             body: formData
         })
             .then(response => {
-                if (response.status === 200) {
-                    console.log(response.status)
+                if (response.ok) {  // Check if response is successful (status in the range 200-299)
+                    console.log("Review submitted successfully!");
                 } else {
                     console.log("POST Request failed with status code:", response.status);
                 }
+            })
+            .catch(error => {
+                console.error("Error submitting review:", error);
             })
     }
     catch (error) {
@@ -78,6 +81,7 @@ const adoptPet = (event) => {
     const user_id = localStorage.getItem("user_id");
     fetch(`https://fluffypaw-backend.onrender.com/pet/adopt/`, {
         method: "POST",
+        headers: { "content-type": "application/json" },
         body: JSON.stringify({ pet_id, user_id })
     })
         .then((response) => {
