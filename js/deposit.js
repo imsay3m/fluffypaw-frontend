@@ -17,7 +17,7 @@ const handleDeposit = (event) => {
                 return response.json();
             })
             .then(function (data) {
-                // Do something with data
+                window.location.href = "user-account.html"
             }, function (rejectionReason) { // 3
                 console.log('Error parsing JSON from response:', rejectionReason, responseClone); // 4
                 responseClone.text() // 5

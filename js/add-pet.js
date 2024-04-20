@@ -26,7 +26,7 @@ const addPet = (e) => {
     const date_of_birth = getValue("date_of_birth")
     const image = document.getElementById("image").files[0]
     const price = parseInt(getValue("price"))
-    const adopter = null
+    const adopter = ''
     const added_by = parseInt(localStorage.getItem('user_id'))
     const categories = parseInt(getValue("categories"))
     console.log(name, description, date_of_birth, image, price, adopter, added_by, categories)
@@ -41,17 +41,22 @@ const addPet = (e) => {
         formData.append("adopter", adopter);
         formData.append("added_by", added_by);
         formData.append("categories", categories);
-        console.log(formData)
+        for (var key in formData) {
+            console.log(key, formData[key]);
+        }
         fetch("https://fluffypaw-backend.onrender.com/pet/list/", {
             method: "POST",
             body: formData
         })
             .then((response) => {
-                if (response.status == 200) {
+                if (response.ok) {
                     window.location.href = "pets.html";
                 } else {
                     console.log("POST Request failed with status code:", response.status);
                 }
+            })
+            .catch(error => {
+                console.error("Error adding pet:", error);
             })
     } catch (err) {
         console.log(err.message);
