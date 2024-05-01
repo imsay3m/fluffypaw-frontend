@@ -17,14 +17,14 @@ const addReview = (event) => {
     loginRedirector();
     const body = document.getElementById("description").value;
     const pet = getParams();
-    const user = localStorage.getItem("user_id");
+    const user = localStorage.getItem("fluffypaw_user_id");
     try {
         const formData = new FormData();
         formData.append("body", body);
         formData.append("pet", pet);
         formData.append("user", user);
         console.log(formData)
-        fetch(`https://fluffypaw-backend.onrender.com/pet/review/`, {
+        fetch(`https://fluffypaw-imsay3m.koyeb.app/pet/review/`, {
             method: "POST",
             body: formData
         })
@@ -65,7 +65,7 @@ const formattedDate = (isoString) => {
 
 const reviewerDetails = async (user_id) => {
     try {
-        const response = await fetch(`https://fluffypaw-backend.onrender.com/user/list/${user_id}/`);
+        const response = await fetch(`https://fluffypaw-imsay3m.koyeb.app/user/list/${user_id}/`);
         const userData = await response.json();
         return userData; // Return the user data
     } catch (error) {
@@ -78,8 +78,8 @@ const adoptPet = (event) => {
     event.preventDefault();
     loginRedirector()
     const pet_id = getParams();
-    const user_id = localStorage.getItem("user_id");
-    fetch(`https://fluffypaw-backend.onrender.com/pet/adopt/`, {
+    const user_id = localStorage.getItem("fluffypaw_user_id");
+    fetch(`https://fluffypaw-imsay3m.koyeb.app/pet/adopt/`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ pet_id, user_id })
@@ -95,14 +95,14 @@ const adoptPet = (event) => {
 const handlePetDetails = async () => {
     const id = getParams();
     try {
-        const response = await fetch(`https://fluffypaw-backend.onrender.com/pet/list/${id}/`)
+        const response = await fetch(`https://fluffypaw-imsay3m.koyeb.app/pet/list/${id}/`)
         const pet = await response.json();
         let cat;
-        const review = await fetch(`https://fluffypaw-backend.onrender.com/pet/review/?pet__id=${id}`)
+        const review = await fetch(`https://fluffypaw-imsay3m.koyeb.app/pet/review/?pet__id=${id}`)
         const reviews = await review.json()
         const loadCategory = async () => {
             try {
-                fetch("https://fluffypaw-backend.onrender.com/pet/category/")
+                fetch("https://fluffypaw-imsay3m.koyeb.app/pet/category/")
                     .then(res => res.json())
                     .then(category => {
                         category.forEach((item) => {
@@ -151,7 +151,7 @@ const handlePetDetails = async () => {
                                         <btn type="submit" onclick="adoptPet(event)" class="btn">Apply Today <img src="img/icon/w_pawprint.png" alt=""></a>`}
                                     </div>
                                     <!-- add review section -->
-                                    ${pet.adopter != null && isAuthenticated() && pet.adopter == localStorage.getItem('user_id') ? `
+                                    ${pet.adopter != null && isAuthenticated() && pet.adopter == localStorage.getItem('fluffypaw_user_id') ? `
                                     <div class="my-3">
                                         <div class="card border-dark">
                                             <div class="card-header">

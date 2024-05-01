@@ -1,7 +1,7 @@
 const loadCategory = async () => {
     loginRedirector()
     try {
-        const response = await fetch("https://fluffypaw-backend.onrender.com/pet/category/");
+        const response = await fetch("https://fluffypaw-imsay3m.koyeb.app/pet/category/");
         const category = await response.json();
         // console.log(category)
         category.forEach((item) => {
@@ -27,7 +27,7 @@ const addPet = (e) => {
     const image = document.getElementById("image").files[0]
     const price = parseInt(getValue("price"))
     const adopter = ''
-    const added_by = parseInt(localStorage.getItem('user_id'))
+    const added_by = parseInt(localStorage.getItem('fluffypaw_user_id'))
     const categories = parseInt(getValue("categories"))
     console.log(name, description, date_of_birth, image, price, adopter, added_by, categories)
 
@@ -44,7 +44,7 @@ const addPet = (e) => {
         for (var key in formData) {
             console.log(key, formData[key]);
         }
-        fetch("https://fluffypaw-backend.onrender.com/pet/list/", {
+        fetch("https://fluffypaw-imsay3m.koyeb.app/pet/list/", {
             method: "POST",
             body: formData
         })

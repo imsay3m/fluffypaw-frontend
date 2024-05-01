@@ -1,13 +1,13 @@
 const loadAccount = () => {
-    const user_id = localStorage.getItem("user_id")
-    const user_account = localStorage.getItem("user_account")
+    const user_id = localStorage.getItem("fluffypaw_user_id")
+    const user_account = localStorage.getItem("fluffypaw_user_account")
     try {
-        fetch(`https://fluffypaw-backend.onrender.com/user/list/${user_id}/`)
+        fetch(`https://fluffypaw-imsay3m.koyeb.app/user/list/${user_id}/`)
             .then((res) => res.json())
             .then((user) => {
                 // console.log(user)
                 try {
-                    fetch(`https://fluffypaw-backend.onrender.com/user/account/${user_account}/`)
+                    fetch(`https://fluffypaw-imsay3m.koyeb.app/user/account/${user_account}/`)
                         .then((response) => response.json())
                         .then((account) => {
                             // console.log(account)

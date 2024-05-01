@@ -91,15 +91,18 @@
             <div class="login-right col ">
                 <form class="mx-5 d-flex flex-column " validate>
                     <h1 class="text-center login-title">Login Form</h1>
+                    <div class="alert-container" id="error-container">
+
+                    </div>
                     <div class="username-container">
                         <label class="form-label" for="username-login">Username</label>
                         <input class="form-control" type="text" placeholder="Type Your Username" id="username-login"
-                            required>
+                            autocomplete="username" required>
                     </div>
                     <div class="password-container">
                         <label class="form-label" for="password-login">Password</label>
                         <input class="form-control" type="password" placeholder="Type Your Password" id="password-login"
-                            required>
+                            autocomplete="current-password" required>
                     </div>
                     <button class="btn btn-auth py-2 m-auto " onclick="handleLogin(event)" type="submit">Login</button>
                     <p class="forgot-password">If you haven't activated your account please check your email and

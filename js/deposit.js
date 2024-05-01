@@ -3,11 +3,11 @@ const handleDeposit = (event) => {
     event.preventDefault()
     loginRedirector()
     const amount = parseInt(getValue("amount"));
-    const account = parseInt(localStorage.getItem('user_account'))
+    const account = parseInt(localStorage.getItem('fluffypaw_user_account'))
     console.log(amount, account)
     if (!isNaN(amount) && !isNaN(account)) {
         var responseClone;
-        fetch("https://fluffypaw-backend.onrender.com/transaction/deposit/", {
+        fetch("https://fluffypaw-imsay3m.koyeb.app/transaction/deposit/", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({ amount, account })

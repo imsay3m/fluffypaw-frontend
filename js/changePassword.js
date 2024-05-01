@@ -3,7 +3,7 @@ const changePassword = (event) => {
     if (!isAuthenticated()) {
         loginRedirector()
     }
-    const user_id = localStorage.getItem("user_id")
+    const user_id = localStorage.getItem("fluffypaw_user_id")
     const old_password = getValue("old-password")
     const password = getValue("password")
     const password2 = getValue("password2")
@@ -11,7 +11,7 @@ const changePassword = (event) => {
     if (password === password2) {
         if (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
             try {
-                fetch(`https://fluffypaw-backend.onrender.com/user/change_password/`, {
+                fetch(`https://fluffypaw-imsay3m.koyeb.app/user/change_password/`, {
                     method: "POST",
                     headers: { "content-type": "application/json" },
                     body: JSON.stringify({ user_id, old_password, password, password2 }),

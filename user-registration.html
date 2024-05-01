@@ -89,14 +89,15 @@
                 <img class="w-100" src="img/images/signup-left.svg" alt="">
             </div>
             <div class="signup-right col ">
-                <form class="mx-5" method="POST" enctype="multipart/form-data">
+                <form class="mx-5" method="POST" enctype="multipart/form-data" validate>
                     <h1 class="text-center signup-title text-center ">Sign Up Form</h1>
                     <div class="alert-container" id="error-container">
 
                     </div>
                     <div class="username-container field-container">
                         <label class="form-label" for="username">Username</label>
-                        <input class="form-control" type="text" placeholder="Type Your Username" id="username" required>
+                        <input class="form-control" type="text" placeholder="Type Your Username" id="username" required
+                            autocomplete="username">
                     </div>
                     <div class="first-name-container field-container">
                         <label class="form-label" for="first_name">First Name</label>
@@ -119,12 +120,12 @@
                     <div class="field-container password-container">
                         <label class="form-label" for="password">Password</label>
                         <input class="form-control" type="password" placeholder="Type Your Password" id="password"
-                            required>
+                            autocomplete="new-password" required>
                     </div>
                     <div class="field-container confirmpassword-container">
                         <label class="form-label" for="confirm_password">Confirm Password</label>
                         <input class="form-control" type="password" placeholder="Confirm Your Password"
-                            id="confirm_password" required>
+                            autocomplete="new-password" id="confirm_password" required>
                     </div>
                     <button onclick="handleSignup(event)" class="btn btn-auth py-2" type="submit">Signup</button>
                 </form>

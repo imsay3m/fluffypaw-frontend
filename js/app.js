@@ -1,5 +1,5 @@
 const loginRedirector = () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('fluffypaw_token');
     if (!token) {
         // User is not authenticated, redirect to login page or perform any other action
         window.location.href = "user-login.html"; // Redirect to the login page
@@ -7,7 +7,7 @@ const loginRedirector = () => {
     }
 }
 const isAuthenticated = () => {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("fluffypaw_token");
     return token !== null;
 };
 

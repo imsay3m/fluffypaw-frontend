@@ -1,6 +1,6 @@
 const loadCategory = async () => {
     try {
-        const response = await fetch("https://fluffypaw-backend.onrender.com/pet/category/");
+        const response = await fetch("https://fluffypaw-imsay3m.koyeb.app/pet/category/");
         const category = await response.json();
         // console.log(category)
         category.forEach((item) => {
@@ -22,7 +22,7 @@ const loadPetsList = async (slug = null) => {
     document.getElementById("cards-nodata").style.display = "none"
     document.getElementById("pet-list-cards").innerHTML = "";
     try {
-        const response = await fetch(`https://fluffypaw-backend.onrender.com/pet/list/?categories__slug=${slug ? slug : ""}`);
+        const response = await fetch(`https://fluffypaw-imsay3m.koyeb.app/pet/list/?categories__slug=${slug ? slug : ""}`);
         const pets = await response.json();
         // console.log(pets)
         if (pets.length > 0) {
@@ -47,7 +47,7 @@ const displayPetsList = (pets) => {
         const yearOfBirth = new Date(DateOfBirth).getFullYear();
         const loadCategory = () => {
             try {
-                fetch("https://fluffypaw-backend.onrender.com/pet/category/")
+                fetch("https://fluffypaw-imsay3m.koyeb.app/pet/category/")
                     .then(res => res.json())
                     .then(category => {
                         // console.log(category)
